@@ -9,9 +9,18 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 /* ── PALETTE ─────────────────────────────────────── */
 const P = {
-  em: "#1F4E3D", em2: "#14352A", em3: "#2C6E54",
-  gold: "#C9A961", goldL: "#EFE3B8", goldD: "#8B6A1C",
-  cream: "#FAF7F0", border: "#E4DDD0", white: "#FFFFFF",
+  // Variabel 'em' (sebelumnya hijau) diubah menjadi gradasi Marun
+  em: "#7A1B29",    // Marun Utama
+  em2: "#4A0E1B",   // Marun Gelap (untuk header & elemen solid)
+  em3: "#9C2740",   // Marun Terang (untuk aksen gradasi)
+  
+  gold: "#D4AF37",  // Emas Elegan
+  goldL: "#F5EEDC", // Emas Pudar / Highlight
+  goldD: "#997A15", // Emas Gelap
+  
+  cream: "#FBF9F6", // Offwhite (Background utama agar lega)
+  border: "#E8E2D9",// Offwhite sedikit gelap untuk batas elemen
+  white: "#FFFFFF",
 };
 
 const SC = {
@@ -45,22 +54,22 @@ const D0_CL = [
   {id:3,  waktu:"H-10 Bulan", tugas:"Tentukan anggaran total & sumber dana",                    pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:4,  waktu:"H-10 Bulan", tugas:"Buat daftar tamu undangan awal",                           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:5,  waktu:"H-9 Bulan",  tugas:"Survei & booking vendor catering",                         pic:"Mempelai Wanita",  status:"Belum", catatan:""},
-  {id:6,  waktu:"H-9 Bulan",  tugas:"Survei & booking dekorasi (mihrab, pelaminan)",             pic:"Mempelai Wanita",  status:"Belum", catatan:""},
+  {id:6,  waktu:"H-9 Bulan",  tugas:"Survei & booking dekorasi (mihrab, pelaminan)",            pic:"Mempelai Wanita",  status:"Belum", catatan:""},
   {id:7,  waktu:"H-8 Bulan",  tugas:"Booking fotografer & videografer",                         pic:"Kedua Mempelai",   status:"Belum", catatan:""},
-  {id:8,  waktu:"H-8 Bulan",  tugas:"Pilih & pesan busana akad (gamis, kerudung)",               pic:"Kedua Mempelai",   status:"Belum", catatan:""},
+  {id:8,  waktu:"H-8 Bulan",  tugas:"Pilih & pesan busana akad (gamis, kerudung)",              pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:9,  waktu:"H-7 Bulan",  tugas:"Konfirmasi penghulu / petugas KUA",                        pic:"Mempelai Pria",    status:"Belum", catatan:""},
   {id:10, waktu:"H-7 Bulan",  tugas:"Urus dokumen administrasi nikah (N1-N7, KK, KTP)",         pic:"Mempelai Pria",    status:"Belum", catatan:""},
   {id:11, waktu:"H-6 Bulan",  tugas:"Pesan undangan fisik & digital",                           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:12, waktu:"H-6 Bulan",  tugas:"Tentukan mas kawin / mahar",                               pic:"Mempelai Pria",    status:"Belum", catatan:""},
-  {id:13, waktu:"H-5 Bulan",  tugas:"Booking MC & qori/qoriah pembaca ayat",                   pic:"Kedua Keluarga",   status:"Belum", catatan:""},
+  {id:13, waktu:"H-5 Bulan",  tugas:"Booking MC & qori/qoriah pembaca ayat",                    pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:14, waktu:"H-5 Bulan",  tugas:"Booking sound system & multimedia masjid",                 pic:"Mempelai Pria",    status:"Belum", catatan:""},
   {id:15, waktu:"H-4 Bulan",  tugas:"Fitting awal busana akad nikah",                           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:16, waktu:"H-4 Bulan",  tugas:"Survei & pesan souvenir tamu",                             pic:"Mempelai Wanita",  status:"Belum", catatan:""},
   {id:17, waktu:"H-3 Bulan",  tugas:"Tes makanan (food tasting) dengan vendor catering",        pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:18, waktu:"H-3 Bulan",  tugas:"Cek ulang tata ruang & kapasitas masjid",                  pic:"Mempelai Pria",    status:"Belum", catatan:""},
-  {id:19, waktu:"H-2 Bulan",  tugas:"Sebar undangan digital & cetak",                          pic:"Kedua Keluarga",   status:"Belum", catatan:""},
+  {id:19, waktu:"H-2 Bulan",  tugas:"Sebar undangan digital & cetak",                           pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:20, waktu:"H-2 Bulan",  tugas:"Konfirmasi jumlah tamu final ke catering",                 pic:"Kedua Keluarga",   status:"Belum", catatan:""},
-  {id:21, waktu:"H-1 Bulan",  tugas:"Gladi resik rangkaian acara akad",                        pic:"Kedua Mempelai",   status:"Belum", catatan:""},
+  {id:21, waktu:"H-1 Bulan",  tugas:"Gladi resik rangkaian acara akad",                         pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:22, waktu:"H-1 Bulan",  tugas:"Finalisasi rundown acara dengan MC & penghulu",            pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:23, waktu:"H-2 Minggu", tugas:"Fitting akhir busana & cek perlengkapan ibadah",           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:24, waktu:"H-2 Minggu", tugas:"Konfirmasi ulang seluruh vendor",                          pic:"Kedua Keluarga",   status:"Belum", catatan:""},
@@ -73,7 +82,7 @@ const D0_CL = [
 ];
 
 const D0_ANG = [
-  {id:1,  kategori:"Sewa & Donasi Masjid",            estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
+  {id:1,  kategori:"Sewa & Donasi Masjid",             estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:2,  kategori:"Penghulu / Petugas KUA",           estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:3,  kategori:"Mas Kawin / Mahar",                estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:4,  kategori:"Catering (Akad & Tamu)",           estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
@@ -81,7 +90,7 @@ const D0_ANG = [
   {id:6,  kategori:"Busana Akad (Pria & Wanita)",      estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:7,  kategori:"Make Up & Rias Pengantin",         estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:8,  kategori:"Fotografer & Videografer",         estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
-  {id:9,  kategori:"MC & Qori/Qoriah",                estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
+  {id:9,  kategori:"MC & Qori/Qoriah",                 estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:10, kategori:"Sound System & Multimedia",        estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:11, kategori:"Undangan (Cetak & Digital)",       estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:12, kategori:"Souvenir Tamu",                    estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
@@ -94,31 +103,31 @@ const D0_VND = [
   {id:1,  kategori:"Catering",              nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
   {id:2,  kategori:"Dekorasi",              nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
   {id:3,  kategori:"Fotografer/Videografer",nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:4,  kategori:"MC",                   nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:5,  kategori:"Qori/Qoriah",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:6,  kategori:"Busana Akad",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:7,  kategori:"Make Up Artist",       nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:8,  kategori:"Sound System",         nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:9,  kategori:"Percetakan Undangan",  nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:10, kategori:"Souvenir",             nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:11, kategori:"Transportasi",         nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:4,  kategori:"MC",                    nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:5,  kategori:"Qori/Qoriah",           nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:6,  kategori:"Busana Akad",           nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:7,  kategori:"Make Up Artist",        nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:8,  kategori:"Sound System",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:9,  kategori:"Percetakan Undangan",   nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:10, kategori:"Souvenir",              nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:11, kategori:"Transportasi",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
 ];
 
 const D0_RD = [
   {id:1,  waktu:"06.30", acara:"Kedatangan & persiapan mempelai pria beserta rombongan",   pic:"Keluarga Mempelai Pria",     catatan:""},
-  {id:2,  waktu:"07.00", acara:"Kedatangan mempelai wanita & wali nikah",                   pic:"Keluarga Mempelai Wanita",   catatan:""},
-  {id:3,  waktu:"07.15", acara:"Tamu & undangan mulai memasuki masjid",                     pic:"Penerima Tamu",              catatan:""},
-  {id:4,  waktu:"07.30", acara:"Pembukaan oleh MC",                                         pic:"MC",                         catatan:""},
+  {id:2,  waktu:"07.00", acara:"Kedatangan mempelai wanita & wali nikah",                  pic:"Keluarga Mempelai Wanita",   catatan:""},
+  {id:3,  waktu:"07.15", acara:"Tamu & undangan mulai memasuki masjid",                    pic:"Penerima Tamu",              catatan:""},
+  {id:4,  waktu:"07.30", acara:"Pembukaan oleh MC",                                        pic:"MC",                         catatan:""},
   {id:5,  waktu:"07.35", acara:"Pembacaan ayat suci Al-Qur'an & sari tilawah",             pic:"Qori/Qoriah",                catatan:""},
-  {id:6,  waktu:"07.45", acara:"Sambutan & nasihat pernikahan",                             pic:"Penghulu/Ustadz",            catatan:""},
-  {id:7,  waktu:"08.00", acara:"Ijab kabul (akad nikah)",                                   pic:"Wali Nikah & Mempelai Pria", catatan:"Disaksikan penghulu & 2 saksi"},
-  {id:8,  waktu:"08.10", acara:"Penandatanganan buku nikah",                                pic:"Petugas KUA",                catatan:""},
-  {id:9,  waktu:"08.20", acara:"Penyerahan mas kawin / mahar",                              pic:"Mempelai Pria",              catatan:""},
-  {id:10, waktu:"08.25", acara:"Doa & tausiyah pernikahan",                                 pic:"Penghulu/Ustadz",            catatan:""},
-  {id:11, waktu:"08.40", acara:"Sungkeman kepada orang tua",                                pic:"Kedua Mempelai",             catatan:""},
-  {id:12, waktu:"08.50", acara:"Sesi foto bersama keluarga",                                pic:"Fotografer",                 catatan:""},
-  {id:13, waktu:"09.10", acara:"Ramah tamah & santap bersama tamu undangan",                pic:"Panitia & Catering",         catatan:""},
-  {id:14, waktu:"10.00", acara:"Acara selesai, tamu mulai pamit",                           pic:"MC",                         catatan:""},
+  {id:6,  waktu:"07.45", acara:"Sambutan & nasihat pernikahan",                            pic:"Penghulu/Ustadz",            catatan:""},
+  {id:7,  waktu:"08.00", acara:"Ijab kabul (akad nikah)",                                  pic:"Wali Nikah & Mempelai Pria", catatan:"Disaksikan penghulu & 2 saksi"},
+  {id:8,  waktu:"08.10", acara:"Penandatanganan buku nikah",                               pic:"Petugas KUA",                catatan:""},
+  {id:9,  waktu:"08.20", acara:"Penyerahan mas kawin / mahar",                             pic:"Mempelai Pria",              catatan:""},
+  {id:10, waktu:"08.25", acara:"Doa & tausiyah pernikahan",                                pic:"Penghulu/Ustadz",            catatan:""},
+  {id:11, waktu:"08.40", acara:"Sungkeman kepada orang tua",                               pic:"Kedua Mempelai",             catatan:""},
+  {id:12, waktu:"08.50", acara:"Sesi foto bersama keluarga",                               pic:"Fotografer",                 catatan:""},
+  {id:13, waktu:"09.10", acara:"Ramah tamah & santap bersama tamu undangan",               pic:"Panitia & Catering",         catatan:""},
+  {id:14, waktu:"10.00", acara:"Acara selesai, tamu mulai pamit",                          pic:"MC",                         catatan:""},
 ];
 
 /* ── SHARED MICRO-COMPONENTS ──────────────────────── */
