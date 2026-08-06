@@ -53,21 +53,46 @@ const formatTanggal = (tgl) => {
 
 // Hook kustom untuk Hitung Mundur
 const useCountdown = (targetDate, waktu) => {
-  const [timeLeft, setTimeLeft] = useState({ months: 0, days: 0, hours: 0, isPast: false });
+  const [timeLeft, setTimeLeft] = useState({ months: 0, days: 0, hours: 0, isPast: false, error: false });
 
   useEffect(() => {
     if (!targetDate) return;
-    
-    // Gabungkan tanggal dan waktu jika ada, jika tidak default ke 08:00
-    const targetString = waktu ? `${targetDate}T${waktu.replace('.', ':')}:00` : `${targetDate}T08:00:00`;
-    const target = new Date(targetString);
 
+    // 1. SANITASI WAKTU: Ekstraksi hanya angka Jam dan Menit (mengabaikan teks kotor)
+    let safeTime = "08:00:00"; // Fallback default
+    if (waktu) {
+      // Mencari pola angka tersembunyi, contoh: "Jam 08.30 Pagi" akan diekstrak menjadi "08:30"
+      const match = waktu.match(/(\d{1,2})[\.:\-](\d{2})/);
+      if (match) {
+        safeTime = `${match[1].padStart(2, '0')}:${match[2]}:00`;
+      }
+    }
+
+    // 2. PARSING TANGGAL: Pengecekan ketat format ISO
+    let target;
+    const isISO = /^\d{4}-\d{2}-\d{2}$/.test(targetDate.trim());
+    
+    if (isISO) {
+        // Jika format sudah standar kalender (YYYY-MM-DD)
+        target = new Date(`${targetDate.trim()}T${safeTime}`);
+    } else {
+        // Jika format adalah residu data lama dari database
+        target = new Date(`${targetDate} ${safeTime}`); 
+    }
+
+    // 3. EVALUASI AKHIR: Jika masih Invalid Date, kita hentikan komputasi agar tidak NaN
+    if (isNaN(target.getTime())) {
+      setTimeLeft(prev => ({ ...prev, error: true }));
+      return;
+    }
+
+    // Logika Hitung Mundur Berjalan
     const timer = setInterval(() => {
       const now = new Date();
       const diff = target - now;
 
       if (diff <= 0) {
-        setTimeLeft({ months: 0, days: 0, hours: 0, isPast: true });
+        setTimeLeft({ months: 0, days: 0, hours: 0, isPast: true, error: false });
         clearInterval(timer);
         return;
       }
@@ -77,7 +102,7 @@ const useCountdown = (targetDate, waktu) => {
       const months = Math.floor(days / 30);
       const remainingDays = days % 30;
 
-      setTimeLeft({ months, days: remainingDays, hours, isPast: false });
+      setTimeLeft({ months, days: remainingDays, hours, isPast: false, error: false });
     }, 1000);
 
     return () => clearInterval(timer);
@@ -254,6 +279,7 @@ function DelDlg({open,label,onClose,onConfirm}) {
   );
 }
 
+// GANTI KOMPONEN BERANDA SEPENUHNYA
 /* ── BERANDA ──────────────────────────────────────── */
 function Beranda({info,setInfo}) {
   const [open, setOpen] = useState(false);
@@ -303,10 +329,15 @@ function Beranda({info,setInfo}) {
           {info.tanggal && <p style={{color:P.gold,fontSize:11,margin:"0 0 2px",fontWeight:600}}>{formatTanggal(info.tanggal)}{info.waktu && ` · ${info.waktu}`}</p>}
           {info.masjid  && <p style={{color:"rgba(255,255,255,.7)",fontSize:11,margin:0}}>{info.masjid}</p>}
 
-          {/* WIDGET HITUNG MUNDUR */}
+          {/* WIDGET HITUNG MUNDUR DENGAN GRACEFUL DEGRADATION */}
           {info.tanggal && (
             <div style={{marginTop:16, paddingTop:16, borderTop:`1px solid rgba(255,255,255,0.15)`}}>
-              {countdown.isPast ? (
+              {countdown.error ? (
+                <div style={{padding:"8px 12px", background:"rgba(254, 226, 226, 0.15)", borderRadius:8, display:"inline-block"}}>
+                    <p style={{color:P.goldL, fontSize:11, margin:0, fontWeight:700}}>⚠️ Kalibrasi Ulang Dibutuhkan</p>
+                    <p style={{color:P.white, fontSize:10, margin:"4px 0 0"}}>Tekan "Edit Info" dan pilih ulang tanggal lewat kalender.</p>
+                </div>
+              ) : countdown.isPast ? (
                 <p style={{color:P.gold, fontSize:12, fontWeight:700, margin:0, letterSpacing:".05em"}}>Hari Bahagia Telah Tiba!</p>
               ) : (
                 <div style={{display:"flex", gap:8, justifyContent:"center"}}>
