@@ -25,7 +25,7 @@ const AudioPlayer = () => {
     <>
       <audio 
         ref={audioRef} 
-        src="/wedding-song.mp3" 
+        src="/audio-wedding.mp3" 
         loop 
       />
       
