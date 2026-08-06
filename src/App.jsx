@@ -265,7 +265,7 @@ function Modal({open,title,onClose,onSave,children}) {
         <div style={{overflowY:"auto",flex:1,padding:24}}>{children}</div>
         {onSave && (
           <div style={{padding:"16px 24px",borderTop:`1px solid ${P.border}`,display:"flex",gap:12, background:P.cream, borderRadius:"0 0 20px 20px"}}>
-            <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.white,color:"#555"}}>Batal</button>
+            <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.grey,color:"#555"}}>Batal</button>
             <button onClick={onSave} style={{flex:2,padding:"12px 0",border:"none",borderRadius:10,fontSize:14,fontWeight:800,cursor:"pointer",background:P.em,color:P.white}}>Simpan Perubahan</button>
           </div>
         )}
@@ -284,7 +284,7 @@ function DelDlg({open,label,onClose,onConfirm}) {
         <p style={{fontWeight:800,fontSize:18,margin:"0 0 8px",color:"#1F2937"}}>Hapus data ini?</p>
         {label && <p style={{fontSize:13,color:"#6B7280",margin:"0 0 24px",lineHeight:1.4}}>{label}</p>}
         <div style={{display:"flex",gap:12}}>
-          <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.white}}>Batal</button>
+          <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.grey}}>Batal</button>
           <button onClick={onConfirm} style={{flex:1,padding:"12px 0",border:"none",borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:"#DC2626",color:P.white}}>Hapus</button>
         </div>
       </div>
