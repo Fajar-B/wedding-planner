@@ -9,33 +9,24 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 /* ── PALETTE ─────────────────────────────────────── */
 const P = {
-  // Variabel 'em' (sebelumnya hijau) diubah menjadi gradasi Marun
-  em: "#7A1B29",    // Marun Utama
-  em2: "#4A0E1B",   // Marun Gelap (untuk header & elemen solid)
-  em3: "#9C2740",   // Marun Terang (untuk aksen gradasi)
-  
-  gold: "#D4AF37",  // Emas Elegan
-  goldL: "#F5EEDC", // Emas Pudar / Highlight
-  goldD: "#997A15", // Emas Gelap
-  
-  cream: "#FBF9F6", // Offwhite (Background utama agar lega)
-  border: "#E8E2D9",// Offwhite sedikit gelap untuk batas elemen
-  white: "#FFFFFF",
+  em: "#6E1423", em2: "#3D0E17", em3: "#8C2635",
+  gold: "#C6A15B", goldL: "#F4E8C9", goldD: "#96762A",
+  cream: "#FBF7EF", border: "#E9DFCC", white: "#FFFFFF",
 };
 
 const SC = {
-  Belum:            ["#FEE2E2","#991B1B"],
-  Proses:           ["#FEF3C7","#92400E"],
-  Selesai:          ["#D1FAE5","#065F46"],
-  "Belum Bayar":    ["#FEE2E2","#991B1B"],
-  "DP/Sebagian":    ["#FEF3C7","#92400E"],
-  Lunas:            ["#D1FAE5","#065F46"],
-  "Belum Booking":  ["#FEE2E2","#991B1B"],
-  "DP Terbayar":    ["#FEF3C7","#92400E"],
-  "Sudah Booking":  ["#D1FAE5","#065F46"],
-  "Belum Konfirmasi":["#FEF3C7","#92400E"],
-  Hadir:            ["#D1FAE5","#065F46"],
-  "Tidak Hadir":    ["#FEE2E2","#991B1B"],
+  Belum:            ["#F5E0DC","#8A2A20"],
+  Proses:           ["#F4E8C9","#8B5E1F"],
+  Selesai:          ["#DCEEDD","#1F6B4A"],
+  "Belum Bayar":    ["#F5E0DC","#8A2A20"],
+  "DP/Sebagian":    ["#F4E8C9","#8B5E1F"],
+  Lunas:            ["#DCEEDD","#1F6B4A"],
+  "Belum Booking":  ["#F5E0DC","#8A2A20"],
+  "DP Terbayar":    ["#F4E8C9","#8B5E1F"],
+  "Sudah Booking":  ["#DCEEDD","#1F6B4A"],
+  "Belum Konfirmasi":["#F4E8C9","#8B5E1F"],
+  Hadir:            ["#DCEEDD","#1F6B4A"],
+  "Tidak Hadir":    ["#F5E0DC","#8A2A20"],
 };
 
 /* ── UTILS ───────────────────────────────────────── */
@@ -54,22 +45,22 @@ const D0_CL = [
   {id:3,  waktu:"H-10 Bulan", tugas:"Tentukan anggaran total & sumber dana",                    pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:4,  waktu:"H-10 Bulan", tugas:"Buat daftar tamu undangan awal",                           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:5,  waktu:"H-9 Bulan",  tugas:"Survei & booking vendor catering",                         pic:"Mempelai Wanita",  status:"Belum", catatan:""},
-  {id:6,  waktu:"H-9 Bulan",  tugas:"Survei & booking dekorasi (mihrab, pelaminan)",            pic:"Mempelai Wanita",  status:"Belum", catatan:""},
+  {id:6,  waktu:"H-9 Bulan",  tugas:"Survei & booking dekorasi (mihrab, pelaminan)",             pic:"Mempelai Wanita",  status:"Belum", catatan:""},
   {id:7,  waktu:"H-8 Bulan",  tugas:"Booking fotografer & videografer",                         pic:"Kedua Mempelai",   status:"Belum", catatan:""},
-  {id:8,  waktu:"H-8 Bulan",  tugas:"Pilih & pesan busana akad (gamis, kerudung)",              pic:"Kedua Mempelai",   status:"Belum", catatan:""},
+  {id:8,  waktu:"H-8 Bulan",  tugas:"Pilih & pesan busana akad (gamis, kerudung)",               pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:9,  waktu:"H-7 Bulan",  tugas:"Konfirmasi penghulu / petugas KUA",                        pic:"Mempelai Pria",    status:"Belum", catatan:""},
   {id:10, waktu:"H-7 Bulan",  tugas:"Urus dokumen administrasi nikah (N1-N7, KK, KTP)",         pic:"Mempelai Pria",    status:"Belum", catatan:""},
   {id:11, waktu:"H-6 Bulan",  tugas:"Pesan undangan fisik & digital",                           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:12, waktu:"H-6 Bulan",  tugas:"Tentukan mas kawin / mahar",                               pic:"Mempelai Pria",    status:"Belum", catatan:""},
-  {id:13, waktu:"H-5 Bulan",  tugas:"Booking MC & qori/qoriah pembaca ayat",                    pic:"Kedua Keluarga",   status:"Belum", catatan:""},
+  {id:13, waktu:"H-5 Bulan",  tugas:"Booking MC & qori/qoriah pembaca ayat",                   pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:14, waktu:"H-5 Bulan",  tugas:"Booking sound system & multimedia masjid",                 pic:"Mempelai Pria",    status:"Belum", catatan:""},
   {id:15, waktu:"H-4 Bulan",  tugas:"Fitting awal busana akad nikah",                           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:16, waktu:"H-4 Bulan",  tugas:"Survei & pesan souvenir tamu",                             pic:"Mempelai Wanita",  status:"Belum", catatan:""},
   {id:17, waktu:"H-3 Bulan",  tugas:"Tes makanan (food tasting) dengan vendor catering",        pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:18, waktu:"H-3 Bulan",  tugas:"Cek ulang tata ruang & kapasitas masjid",                  pic:"Mempelai Pria",    status:"Belum", catatan:""},
-  {id:19, waktu:"H-2 Bulan",  tugas:"Sebar undangan digital & cetak",                           pic:"Kedua Keluarga",   status:"Belum", catatan:""},
+  {id:19, waktu:"H-2 Bulan",  tugas:"Sebar undangan digital & cetak",                          pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:20, waktu:"H-2 Bulan",  tugas:"Konfirmasi jumlah tamu final ke catering",                 pic:"Kedua Keluarga",   status:"Belum", catatan:""},
-  {id:21, waktu:"H-1 Bulan",  tugas:"Gladi resik rangkaian acara akad",                         pic:"Kedua Mempelai",   status:"Belum", catatan:""},
+  {id:21, waktu:"H-1 Bulan",  tugas:"Gladi resik rangkaian acara akad",                        pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:22, waktu:"H-1 Bulan",  tugas:"Finalisasi rundown acara dengan MC & penghulu",            pic:"Kedua Keluarga",   status:"Belum", catatan:""},
   {id:23, waktu:"H-2 Minggu", tugas:"Fitting akhir busana & cek perlengkapan ibadah",           pic:"Kedua Mempelai",   status:"Belum", catatan:""},
   {id:24, waktu:"H-2 Minggu", tugas:"Konfirmasi ulang seluruh vendor",                          pic:"Kedua Keluarga",   status:"Belum", catatan:""},
@@ -82,7 +73,7 @@ const D0_CL = [
 ];
 
 const D0_ANG = [
-  {id:1,  kategori:"Sewa & Donasi Masjid",             estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
+  {id:1,  kategori:"Sewa & Donasi Masjid",            estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:2,  kategori:"Penghulu / Petugas KUA",           estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:3,  kategori:"Mas Kawin / Mahar",                estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:4,  kategori:"Catering (Akad & Tamu)",           estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
@@ -90,7 +81,7 @@ const D0_ANG = [
   {id:6,  kategori:"Busana Akad (Pria & Wanita)",      estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:7,  kategori:"Make Up & Rias Pengantin",         estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:8,  kategori:"Fotografer & Videografer",         estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
-  {id:9,  kategori:"MC & Qori/Qoriah",                 estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
+  {id:9,  kategori:"MC & Qori/Qoriah",                estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:10, kategori:"Sound System & Multimedia",        estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:11, kategori:"Undangan (Cetak & Digital)",       estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
   {id:12, kategori:"Souvenir Tamu",                    estimasi:0, aktual:0, statusBayar:"Belum Bayar", catatan:""},
@@ -103,36 +94,36 @@ const D0_VND = [
   {id:1,  kategori:"Catering",              nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
   {id:2,  kategori:"Dekorasi",              nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
   {id:3,  kategori:"Fotografer/Videografer",nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:4,  kategori:"MC",                    nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:5,  kategori:"Qori/Qoriah",           nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:6,  kategori:"Busana Akad",           nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:7,  kategori:"Make Up Artist",        nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:8,  kategori:"Sound System",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:9,  kategori:"Percetakan Undangan",   nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:10, kategori:"Souvenir",              nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
-  {id:11, kategori:"Transportasi",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:4,  kategori:"MC",                   nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:5,  kategori:"Qori/Qoriah",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:6,  kategori:"Busana Akad",          nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:7,  kategori:"Make Up Artist",       nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:8,  kategori:"Sound System",         nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:9,  kategori:"Percetakan Undangan",  nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:10, kategori:"Souvenir",             nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
+  {id:11, kategori:"Transportasi",         nama:"", narahubung:"", telp:"", status:"Belum Booking", catatan:""},
 ];
 
 const D0_RD = [
   {id:1,  waktu:"06.30", acara:"Kedatangan & persiapan mempelai pria beserta rombongan",   pic:"Keluarga Mempelai Pria",     catatan:""},
-  {id:2,  waktu:"07.00", acara:"Kedatangan mempelai wanita & wali nikah",                  pic:"Keluarga Mempelai Wanita",   catatan:""},
-  {id:3,  waktu:"07.15", acara:"Tamu & undangan mulai memasuki masjid",                    pic:"Penerima Tamu",              catatan:""},
-  {id:4,  waktu:"07.30", acara:"Pembukaan oleh MC",                                        pic:"MC",                         catatan:""},
+  {id:2,  waktu:"07.00", acara:"Kedatangan mempelai wanita & wali nikah",                   pic:"Keluarga Mempelai Wanita",   catatan:""},
+  {id:3,  waktu:"07.15", acara:"Tamu & undangan mulai memasuki masjid",                     pic:"Penerima Tamu",              catatan:""},
+  {id:4,  waktu:"07.30", acara:"Pembukaan oleh MC",                                         pic:"MC",                         catatan:""},
   {id:5,  waktu:"07.35", acara:"Pembacaan ayat suci Al-Qur'an & sari tilawah",             pic:"Qori/Qoriah",                catatan:""},
-  {id:6,  waktu:"07.45", acara:"Sambutan & nasihat pernikahan",                            pic:"Penghulu/Ustadz",            catatan:""},
-  {id:7,  waktu:"08.00", acara:"Ijab kabul (akad nikah)",                                  pic:"Wali Nikah & Mempelai Pria", catatan:"Disaksikan penghulu & 2 saksi"},
-  {id:8,  waktu:"08.10", acara:"Penandatanganan buku nikah",                               pic:"Petugas KUA",                catatan:""},
-  {id:9,  waktu:"08.20", acara:"Penyerahan mas kawin / mahar",                             pic:"Mempelai Pria",              catatan:""},
-  {id:10, waktu:"08.25", acara:"Doa & tausiyah pernikahan",                                pic:"Penghulu/Ustadz",            catatan:""},
-  {id:11, waktu:"08.40", acara:"Sungkeman kepada orang tua",                               pic:"Kedua Mempelai",             catatan:""},
-  {id:12, waktu:"08.50", acara:"Sesi foto bersama keluarga",                               pic:"Fotografer",                 catatan:""},
-  {id:13, waktu:"09.10", acara:"Ramah tamah & santap bersama tamu undangan",               pic:"Panitia & Catering",         catatan:""},
-  {id:14, waktu:"10.00", acara:"Acara selesai, tamu mulai pamit",                          pic:"MC",                         catatan:""},
+  {id:6,  waktu:"07.45", acara:"Sambutan & nasihat pernikahan",                             pic:"Penghulu/Ustadz",            catatan:""},
+  {id:7,  waktu:"08.00", acara:"Ijab kabul (akad nikah)",                                   pic:"Wali Nikah & Mempelai Pria", catatan:"Disaksikan penghulu & 2 saksi"},
+  {id:8,  waktu:"08.10", acara:"Penandatanganan buku nikah",                                pic:"Petugas KUA",                catatan:""},
+  {id:9,  waktu:"08.20", acara:"Penyerahan mas kawin / mahar",                              pic:"Mempelai Pria",              catatan:""},
+  {id:10, waktu:"08.25", acara:"Doa & tausiyah pernikahan",                                 pic:"Penghulu/Ustadz",            catatan:""},
+  {id:11, waktu:"08.40", acara:"Sungkeman kepada orang tua",                                pic:"Kedua Mempelai",             catatan:""},
+  {id:12, waktu:"08.50", acara:"Sesi foto bersama keluarga",                                pic:"Fotografer",                 catatan:""},
+  {id:13, waktu:"09.10", acara:"Ramah tamah & santap bersama tamu undangan",                pic:"Panitia & Catering",         catatan:""},
+  {id:14, waktu:"10.00", acara:"Acara selesai, tamu mulai pamit",                           pic:"MC",                         catatan:""},
 ];
 
 /* ── SHARED MICRO-COMPONENTS ──────────────────────── */
 const Badge = ({v}) => {
-  const [bg, tx] = SC[v] || ["#E5E7EB","#374151"];
+  const [bg, tx] = SC[v] || ["#E9DFCC","#4A332C"];
   return <span style={{background:bg,color:tx,fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:99,whiteSpace:"nowrap",display:"inline-block"}}>{v}</span>;
 };
 
@@ -142,9 +133,12 @@ const Card = ({children,style={}}) => (
 
 const SectionHeader = ({title,onAdd,addLabel="+ Tambah"}) => (
   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
-    <h3 style={{fontSize:13,fontWeight:800,color:P.em,margin:0}}>{title}</h3>
+    <h3 style={{fontSize:13,fontWeight:800,color:P.em,margin:0,letterSpacing:".01em",display:"flex",alignItems:"center",gap:7}}>
+      <span style={{width:3,height:13,background:P.gold,borderRadius:2,display:"inline-block"}} />
+      {title}
+    </h3>
     {onAdd && (
-      <button onClick={onAdd} style={{background:P.em,color:"#fff",border:"none",borderRadius:10,padding:"5px 12px",fontSize:11,fontWeight:700,cursor:"pointer"}}>
+      <button onClick={onAdd} style={{background:P.em,color:"#fff",border:"none",borderRadius:10,padding:"5px 12px",fontSize:11,fontWeight:700,cursor:"pointer",boxShadow:"0 2px 8px rgba(110,20,35,.25)"}}>
         {addLabel}
       </button>
     )}
@@ -154,11 +148,11 @@ const SectionHeader = ({title,onAdd,addLabel="+ Tambah"}) => (
 const ActionBtns = ({onEdit,onDelete}) => (
   <div style={{display:"flex",gap:4,flexShrink:0}}>
     <button onClick={onEdit} title="Edit" style={{width:28,height:28,background:P.goldL,border:"none",borderRadius:8,cursor:"pointer",fontSize:13,display:"flex",alignItems:"center",justifyContent:"center"}}>✏️</button>
-    <button onClick={onDelete} title="Hapus" style={{width:28,height:28,background:"#FEE2E2",border:"none",borderRadius:8,cursor:"pointer",fontSize:13,display:"flex",alignItems:"center",justifyContent:"center"}}>🗑️</button>
+    <button onClick={onDelete} title="Hapus" style={{width:28,height:28,background:"#F5E0DC",border:"none",borderRadius:8,cursor:"pointer",fontSize:13,display:"flex",alignItems:"center",justifyContent:"center"}}>🗑️</button>
   </div>
 );
 
-const inp = {width:"100%",border:`1px solid ${P.border}`,borderRadius:10,padding:"8px 12px",fontSize:12,fontFamily:"inherit",outline:"none",boxSizing:"border-box",background:P.white, color:"#1F2937"};
+const inp = {width:"100%",border:`1px solid ${P.border}`,borderRadius:10,padding:"8px 12px",fontSize:12,fontFamily:"inherit",outline:"none",boxSizing:"border-box",background:P.white, color:"#2B1B18"};
 
 const Fld = ({label,children}) => (
   <div style={{marginBottom:12}}>
@@ -174,15 +168,15 @@ function Modal({open,title,onClose,onSave,children}) {
     <div style={{position:"fixed",inset:0,zIndex:50,display:"flex",alignItems:"flex-end",justifyContent:"center"}} onClick={onClose}>
       <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.55)",backdropFilter:"blur(4px)"}} />
       <div onClick={e=>e.stopPropagation()}
-        style={{position:"relative",width:"100%",maxWidth:480,background:P.white,borderRadius:"20px 20px 0 0",maxHeight:"90vh",display:"flex",flexDirection:"column",boxShadow:"0 -8px 40px rgba(0,0,0,.25)"}}>
-        <div style={{padding:"14px 16px 12px",borderBottom:`1px solid ${P.border}`,display:"flex",alignItems:"center",justifyContent:"space-between",background:P.em,borderRadius:"20px 20px 0 0"}}>
-          <span style={{color:P.white,fontWeight:800,fontSize:13}}>{title}</span>
+        style={{position:"relative",width:"100%",maxWidth:480,background:P.white,borderRadius:"20px 20px 0 0",maxHeight:"90vh",display:"flex",flexDirection:"column",boxShadow:"0 -8px 40px rgba(61,14,23,.28)"}}>
+        <div style={{padding:"14px 16px 12px",borderBottom:`2px solid ${P.gold}`,display:"flex",alignItems:"center",justifyContent:"space-between",background:P.em,borderRadius:"20px 20px 0 0"}}>
+          <span style={{color:P.white,fontWeight:700,fontSize:13,fontFamily:"'Playfair Display',Georgia,serif"}}>{title}</span>
           <button onClick={onClose} style={{background:"rgba(255,255,255,.15)",border:"none",borderRadius:8,color:P.white,width:28,height:28,cursor:"pointer",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
         </div>
         <div style={{overflowY:"auto",flex:1,padding:16}}>{children}</div>
         {onSave && (
           <div style={{padding:"12px 16px",borderTop:`1px solid ${P.border}`,display:"flex",gap:8}}>
-            <button onClick={onClose} style={{flex:1,padding:"9px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:12,fontWeight:700,cursor:"pointer",background:P.white,color:"#555"}}>Batal</button>
+            <button onClick={onClose} style={{flex:1,padding:"9px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:12,fontWeight:700,cursor:"pointer",background:P.white,color:"#6B5A4F"}}>Batal</button>
             <button onClick={onSave} style={{flex:2,padding:"9px 0",border:"none",borderRadius:10,fontSize:12,fontWeight:800,cursor:"pointer",background:P.em,color:P.white}}>Simpan Perubahan</button>
           </div>
         )}
@@ -197,13 +191,13 @@ function DelDlg({open,label,onClose,onConfirm}) {
   return (
     <div style={{position:"fixed",inset:0,zIndex:60,display:"flex",alignItems:"center",justifyContent:"center",padding:20}} onClick={onClose}>
       <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.6)"}} />
-      <div onClick={e=>e.stopPropagation()} style={{position:"relative",background:P.white,borderRadius:16,padding:20,width:"100%",maxWidth:300,textAlign:"center",boxShadow:"0 8px 40px rgba(0,0,0,.3)"}}>
+      <div onClick={e=>e.stopPropagation()} style={{position:"relative",background:P.white,borderRadius:16,padding:20,width:"100%",maxWidth:300,textAlign:"center",boxShadow:"0 8px 40px rgba(61,14,23,.3)"}}>
         <div style={{fontSize:36,marginBottom:8}}>🗑️</div>
-        <p style={{fontWeight:800,fontSize:14,margin:"0 0 4px",color:"#1F2937"}}>Hapus data ini?</p>
-        {label && <p style={{fontSize:11,color:"#6B7280",margin:"0 0 16px"}}>{label}</p>}
+        <p style={{fontWeight:800,fontSize:14,margin:"0 0 4px",color:"#2B1B18"}}>Hapus data ini?</p>
+        {label && <p style={{fontSize:11,color:"#8A7462",margin:"0 0 16px"}}>{label}</p>}
         <div style={{display:"flex",gap:8}}>
           <button onClick={onClose} style={{flex:1,padding:"8px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:12,fontWeight:700,cursor:"pointer",background:P.white}}>Batal</button>
-          <button onClick={onConfirm} style={{flex:1,padding:"8px 0",border:"none",borderRadius:10,fontSize:12,fontWeight:700,cursor:"pointer",background:"#DC2626",color:P.white}}>Hapus</button>
+          <button onClick={onConfirm} style={{flex:1,padding:"8px 0",border:"none",borderRadius:10,fontSize:12,fontWeight:700,cursor:"pointer",background:"#B23A2E",color:P.white}}>Hapus</button>
         </div>
       </div>
     </div>
@@ -227,22 +221,27 @@ function Beranda({info,setInfo}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:12}}>
       {/* Hero */}
-      <div style={{borderRadius:20,overflow:"hidden",boxShadow:"0 4px 24px rgba(0,0,0,.15)"}}>
+      <div style={{borderRadius:20,overflow:"hidden",boxShadow:"0 6px 28px rgba(110,20,35,.22)",border:`1px solid ${P.gold}40`}}>
         <div style={{background:`linear-gradient(145deg,${P.em2} 0%,${P.em} 55%,${P.em3} 100%)`,padding:"28px 20px 20px",textAlign:"center",position:"relative"}}>
-          <div style={{position:"absolute",inset:0,opacity:.07,backgroundImage:"url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A961' fill-opacity='1'%3E%3Cpath d='M30 0l8.66 5v10L30 20l-8.66-5V5zM0 20l8.66 5v10L0 40l-8.66-5V25zM60 20l8.66 5v10L60 40l-8.66-5V25z'/%3E%3C/g%3E%3C/svg%3E\")"}} />
-          <div style={{fontSize:32,marginBottom:6}}>🕌</div>
-          <p style={{color:"rgba(255,255,255,.6)",fontSize:9,letterSpacing:".2em",textTransform:"uppercase",margin:"0 0 8px",fontWeight:600}}>Walimatul &lsquo;Urs</p>
+          <div style={{position:"absolute",inset:0,opacity:.09,backgroundImage:"url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C6A15B' fill-opacity='1'%3E%3Cpath d='M30 0l8.66 5v10L30 20l-8.66-5V5zM0 20l8.66 5v10L0 40l-8.66-5V25zM60 20l8.66 5v10L60 40l-8.66-5V25z'/%3E%3C/g%3E%3C/svg%3E\")"}} />
+          <div style={{fontSize:30,marginBottom:8,filter:"drop-shadow(0 2px 4px rgba(0,0,0,.25))"}}>🕌</div>
+          <p style={{color:P.gold,fontSize:9,letterSpacing:".28em",textTransform:"uppercase",margin:"0 0 10px",fontWeight:700}}>Walimatul &lsquo;Urs</p>
           {info.namaPria || info.namaWanita ? (
             <>
-              <h2 style={{color:P.white,fontSize:22,fontWeight:900,margin:"0 0 2px",fontFamily:"Georgia,serif"}}>{info.namaPria||"—"}</h2>
-              <p style={{color:P.gold,fontSize:18,margin:"2px 0",fontFamily:"Georgia,serif"}}>&amp;</p>
-              <h2 style={{color:P.white,fontSize:22,fontWeight:900,margin:"0 0 8px",fontFamily:"Georgia,serif"}}>{info.namaWanita||"—"}</h2>
+              <h2 style={{color:P.white,fontSize:24,fontWeight:700,margin:"0 0 4px",fontFamily:"'Playfair Display',Georgia,serif",letterSpacing:".01em"}}>{info.namaPria||"—"}</h2>
+              <p style={{color:P.gold,fontSize:15,margin:"3px 0",fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic"}}>&amp;</p>
+              <h2 style={{color:P.white,fontSize:24,fontWeight:700,margin:"0 0 10px",fontFamily:"'Playfair Display',Georgia,serif",letterSpacing:".01em"}}>{info.namaWanita||"—"}</h2>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8,margin:"0 0 10px"}}>
+                <span style={{width:24,height:1,background:`${P.gold}88`}} />
+                <span style={{width:5,height:5,transform:"rotate(45deg)",background:P.gold,display:"inline-block"}} />
+                <span style={{width:24,height:1,background:`${P.gold}88`}} />
+              </div>
             </>
           ) : (
             <p style={{color:"rgba(255,255,255,.35)",fontStyle:"italic",margin:"0 0 8px",fontSize:14}}>Isi nama mempelai</p>
           )}
-          {info.tanggal && <p style={{color:P.gold,fontSize:11,margin:"0 0 2px",fontWeight:600}}>{info.tanggal}{info.waktu && ` · ${info.waktu}`}</p>}
-          {info.masjid  && <p style={{color:"rgba(255,255,255,.7)",fontSize:11,margin:0}}>{info.masjid}</p>}
+          {info.tanggal && <p style={{color:P.gold,fontSize:11,margin:"0 0 2px",fontWeight:600,letterSpacing:".02em"}}>{info.tanggal}{info.waktu && ` · ${info.waktu}`}</p>}
+          {info.masjid  && <p style={{color:"rgba(255,255,255,.75)",fontSize:11,margin:0}}>{info.masjid}</p>}
         </div>
         <div style={{background:P.em2,padding:"10px 16px",display:"flex",justifyContent:"flex-end"}}>
           <button onClick={open_} style={{background:P.gold,color:P.em2,border:"none",borderRadius:8,padding:"5px 14px",fontSize:11,fontWeight:800,cursor:"pointer"}}>✏️ Edit Info</button>
@@ -256,8 +255,8 @@ function Beranda({info,setInfo}) {
         </div>
         {fields.map(([k,lbl]) => (
           <div key={k} style={{display:"flex",gap:10,padding:"8px 14px",borderBottom:`1px solid ${P.cream}`}}>
-            <span style={{width:130,flexShrink:0,fontSize:11,color:"#9CA3AF"}}>{lbl}</span>
-            <span style={{fontSize:11,fontWeight:600,color:info[k]?"#1F2937":"#D1D5DB",fontStyle:info[k]?"normal":"italic"}}>{info[k]||"—"}</span>
+            <span style={{width:130,flexShrink:0,fontSize:11,color:"#A6907C"}}>{lbl}</span>
+            <span style={{fontSize:11,fontWeight:600,color:info[k]?"#2B1B18":"#C9B8A0",fontStyle:info[k]?"normal":"italic"}}>{info[k]||"—"}</span>
           </div>
         ))}
       </Card>
@@ -301,21 +300,21 @@ function Checklist({data,setData}) {
         <div style={{padding:14}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:10}}>
             <div>
-              <p style={{margin:"0 0 2px",fontSize:11,color:"#9CA3AF"}}>Progres Persiapan</p>
+              <p style={{margin:"0 0 2px",fontSize:11,color:"#A6907C"}}>Progres Persiapan</p>
               <p style={{margin:0,fontSize:20,fontWeight:900,color:P.em}}>{pct}%</p>
             </div>
             <div style={{textAlign:"right"}}>
               <p style={{margin:0,fontSize:24,fontWeight:900,color:P.gold}}>{done}</p>
-              <p style={{margin:0,fontSize:10,color:"#9CA3AF"}}>dari {data.length} tugas</p>
+              <p style={{margin:0,fontSize:10,color:"#A6907C"}}>dari {data.length} tugas</p>
             </div>
           </div>
-          <div style={{height:6,background:"#F3F4F6",borderRadius:99,overflow:"hidden"}}>
+          <div style={{height:6,background:"#F0E7D8",borderRadius:99,overflow:"hidden"}}>
             <div style={{height:"100%",width:`${pct}%`,background:`linear-gradient(90deg,${P.em},${P.gold})`,borderRadius:99,transition:"width .4s"}} />
           </div>
           <div style={{display:"flex",gap:12,marginTop:8}}>
             {["Belum","Proses","Selesai"].map(s=>(
-              <span key={s} style={{display:"flex",alignItems:"center",gap:4,fontSize:10,color:"#6B7280"}}>
-                <span style={{width:8,height:8,borderRadius:99,background:(SC[s]||["#ccc"])[1],display:"inline-block"}} />
+              <span key={s} style={{display:"flex",alignItems:"center",gap:4,fontSize:10,color:"#8A7462"}}>
+                <span style={{width:8,height:8,borderRadius:99,background:(SC[s]||["#C9B8A0"])[1],display:"inline-block"}} />
                 {data.filter(i=>i.status===s).length} {s}
               </span>
             ))}
@@ -332,12 +331,12 @@ function Checklist({data,setData}) {
             {items.map((item,idx)=>(
               <div key={item.id} style={{display:"flex",gap:10,padding:"10px 12px",borderBottom:idx<items.length-1?`1px solid ${P.cream}`:"none",alignItems:"flex-start"}}>
                 <div style={{flex:1,minWidth:0}}>
-                  <p style={{margin:"0 0 4px",fontSize:12,fontWeight:600,color:"#1F2937",lineHeight:1.4}}>{item.tugas}</p>
+                  <p style={{margin:"0 0 4px",fontSize:12,fontWeight:600,color:"#2B1B18",lineHeight:1.4}}>{item.tugas}</p>
                   <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
                     <Badge v={item.status} />
-                    {item.pic && <span style={{fontSize:10,color:"#9CA3AF"}}>👤 {item.pic}</span>}
+                    {item.pic && <span style={{fontSize:10,color:"#A6907C"}}>👤 {item.pic}</span>}
                   </div>
-                  {item.catatan && <p style={{margin:"4px 0 0",fontSize:10,color:"#9CA3AF",fontStyle:"italic"}}>{item.catatan}</p>}
+                  {item.catatan && <p style={{margin:"4px 0 0",fontSize:10,color:"#A6907C",fontStyle:"italic"}}>{item.catatan}</p>}
                 </div>
                 <ActionBtns onEdit={()=>openEdit(item)} onDelete={()=>setDel(item)} />
               </div>
@@ -385,7 +384,7 @@ function Anggaran({data,setData}) {
   const statCard = (lbl,val,clr,prefix="")=> (
     <Card key={lbl} style={{flex:1}}>
       <div style={{padding:"10px 8px",textAlign:"center"}}>
-        <p style={{margin:"0 0 2px",fontSize:9,color:"#9CA3AF",textTransform:"uppercase",fontWeight:700}}>{lbl}</p>
+        <p style={{margin:"0 0 2px",fontSize:9,color:"#A6907C",textTransform:"uppercase",fontWeight:700}}>{lbl}</p>
         <p style={{margin:0,fontSize:11,fontWeight:900,color:clr,wordBreak:"break-all"}}>{prefix}{fmtRp(val)}</p>
       </div>
     </Card>
@@ -395,8 +394,8 @@ function Anggaran({data,setData}) {
     <div style={{display:"flex",flexDirection:"column",gap:12}}>
       <div style={{display:"flex",gap:8}}>
         {statCard("Estimasi",totEst,P.em)}
-        {statCard("Aktual",totAkt,totAkt>totEst?"#DC2626":P.em)}
-        {statCard("Selisih",Math.abs(sel),sel<0?"#DC2626":"#059669",sel<0?"−":"")}
+        {statCard("Aktual",totAkt,totAkt>totEst?"#B23A2E":P.em)}
+        {statCard("Selisih",Math.abs(sel),sel<0?"#B23A2E":"#2E8B57",sel<0?"−":"")}
       </div>
 
       {/* Budget bar */}
@@ -404,11 +403,11 @@ function Anggaran({data,setData}) {
         <Card>
           <div style={{padding:"10px 14px"}}>
             <div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
-              <span style={{fontSize:10,color:"#9CA3AF"}}>Realisasi anggaran</span>
-              <span style={{fontSize:10,fontWeight:700,color:totAkt>totEst?"#DC2626":P.em}}>{Math.round(totAkt/totEst*100)}%</span>
+              <span style={{fontSize:10,color:"#A6907C"}}>Realisasi anggaran</span>
+              <span style={{fontSize:10,fontWeight:700,color:totAkt>totEst?"#B23A2E":P.em}}>{Math.round(totAkt/totEst*100)}%</span>
             </div>
-            <div style={{height:8,background:"#F3F4F6",borderRadius:99,overflow:"hidden"}}>
-              <div style={{height:"100%",width:`${Math.min(totAkt/totEst*100,100)}%`,background:totAkt>totEst?"#DC2626":`linear-gradient(90deg,${P.em},${P.gold})`,borderRadius:99,transition:"width .4s"}} />
+            <div style={{height:8,background:"#F0E7D8",borderRadius:99,overflow:"hidden"}}>
+              <div style={{height:"100%",width:`${Math.min(totAkt/totEst*100,100)}%`,background:totAkt>totEst?"#B23A2E":`linear-gradient(90deg,${P.em},${P.gold})`,borderRadius:99,transition:"width .4s"}} />
             </div>
           </div>
         </Card>
@@ -419,13 +418,13 @@ function Anggaran({data,setData}) {
         {data.map((item,idx)=>(
           <div key={item.id} style={{display:"flex",gap:10,padding:"10px 12px",borderBottom:idx<data.length-1?`1px solid ${P.cream}`:"none",alignItems:"flex-start"}}>
             <div style={{flex:1,minWidth:0}}>
-              <p style={{margin:"0 0 4px",fontSize:12,fontWeight:700,color:"#1F2937"}}>{item.kategori}</p>
-              <div style={{display:"flex",gap:8,flexWrap:"wrap",fontSize:10,color:"#9CA3AF",marginBottom:4}}>
-                <span>Est: <strong style={{color:"#374151"}}>{fmtRp(item.estimasi)}</strong></span>
-                <span>Aktual: <strong style={{color:"#374151"}}>{fmtRp(item.aktual)}</strong></span>
+              <p style={{margin:"0 0 4px",fontSize:12,fontWeight:700,color:"#2B1B18"}}>{item.kategori}</p>
+              <div style={{display:"flex",gap:8,flexWrap:"wrap",fontSize:10,color:"#A6907C",marginBottom:4}}>
+                <span>Est: <strong style={{color:"#4A332C"}}>{fmtRp(item.estimasi)}</strong></span>
+                <span>Aktual: <strong style={{color:"#4A332C"}}>{fmtRp(item.aktual)}</strong></span>
               </div>
               <Badge v={item.statusBayar} />
-              {item.catatan && <p style={{margin:"4px 0 0",fontSize:10,color:"#9CA3AF",fontStyle:"italic"}}>{item.catatan}</p>}
+              {item.catatan && <p style={{margin:"4px 0 0",fontSize:10,color:"#A6907C",fontStyle:"italic"}}>{item.catatan}</p>}
             </div>
             <ActionBtns onEdit={()=>openEdit(item)} onDelete={()=>setDel(item)} />
           </div>
@@ -469,10 +468,10 @@ function Vendor({data,setData}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:12}}>
       <div style={{display:"flex",gap:8}}>
-        {[["Total",data.length,P.em],["Booked",booked,"#059669"],["Belum",data.length-booked,"#DC2626"]].map(([l,v,c])=>(
+        {[["Total",data.length,P.em],["Booked",booked,"#2E8B57"],["Belum",data.length-booked,"#B23A2E"]].map(([l,v,c])=>(
           <Card key={l} style={{flex:1}}>
             <div style={{padding:"10px 6px",textAlign:"center"}}>
-              <p style={{margin:"0 0 2px",fontSize:9,color:"#9CA3AF",fontWeight:700,textTransform:"uppercase"}}>{l}</p>
+              <p style={{margin:"0 0 2px",fontSize:9,color:"#A6907C",fontWeight:700,textTransform:"uppercase"}}>{l}</p>
               <p style={{margin:0,fontSize:20,fontWeight:900,color:c}}>{v}</p>
             </div>
           </Card>
@@ -488,12 +487,12 @@ function Vendor({data,setData}) {
                 <span style={{fontSize:12,fontWeight:800,color:P.em2}}>{item.kategori}</span>
                 <Badge v={item.status} />
               </div>
-              {item.nama && <p style={{margin:"0 0 2px",fontSize:11,fontWeight:600,color:"#374151"}}>{item.nama}</p>}
+              {item.nama && <p style={{margin:"0 0 2px",fontSize:11,fontWeight:600,color:"#4A332C"}}>{item.nama}</p>}
               <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-                {item.narahubung && <span style={{fontSize:10,color:"#9CA3AF"}}>👤 {item.narahubung}</span>}
-                {item.telp && <span style={{fontSize:10,color:"#9CA3AF"}}>📞 {item.telp}</span>}
+                {item.narahubung && <span style={{fontSize:10,color:"#A6907C"}}>👤 {item.narahubung}</span>}
+                {item.telp && <span style={{fontSize:10,color:"#A6907C"}}>📞 {item.telp}</span>}
               </div>
-              {item.catatan && <p style={{margin:"4px 0 0",fontSize:10,color:"#9CA3AF",fontStyle:"italic"}}>{item.catatan}</p>}
+              {item.catatan && <p style={{margin:"4px 0 0",fontSize:10,color:"#A6907C",fontStyle:"italic"}}>{item.catatan}</p>}
             </div>
             <ActionBtns onEdit={()=>openEdit(item)} onDelete={()=>setDel(item)} />
           </div>
@@ -549,8 +548,8 @@ function Rundown({data,setData}) {
               <div style={{width:14,height:14,borderRadius:99,border:`2.5px solid ${P.em}`,background:P.white,flexShrink:0,marginTop:4,zIndex:1}} />
               <div style={{flex:1,background:P.white,borderRadius:12,border:`1px solid ${P.border}`,padding:"9px 10px",display:"flex",gap:8,alignItems:"flex-start"}}>
                 <div style={{flex:1,minWidth:0}}>
-                  <p style={{margin:"0 0 3px",fontSize:12,fontWeight:700,color:"#1F2937",lineHeight:1.4}}>{item.acara}</p>
-                  {item.pic && <p style={{margin:0,fontSize:10,color:"#9CA3AF"}}>👤 {item.pic}</p>}
+                  <p style={{margin:"0 0 3px",fontSize:12,fontWeight:700,color:"#2B1B18",lineHeight:1.4}}>{item.acara}</p>
+                  {item.pic && <p style={{margin:0,fontSize:10,color:"#A6907C"}}>👤 {item.pic}</p>}
                   {item.catatan && <p style={{margin:"3px 0 0",fontSize:10,color:P.goldD,fontStyle:"italic"}}>📌 {item.catatan}</p>}
                 </div>
                 <ActionBtns onEdit={()=>openEdit(item)} onDelete={()=>setDel(item)} />
@@ -600,10 +599,10 @@ function Tamu({data,setData}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:12}}>
       <div style={{display:"flex",gap:8}}>
-        {[["Tamu",data.length,P.em],["Est. Orang",totOrang,"#374151"],["Hadir",hadir,"#059669"]].map(([l,v,c])=>(
+        {[["Tamu",data.length,P.em],["Est. Orang",totOrang,"#4A332C"],["Hadir",hadir,"#2E8B57"]].map(([l,v,c])=>(
           <Card key={l} style={{flex:1}}>
             <div style={{padding:"10px 6px",textAlign:"center"}}>
-              <p style={{margin:"0 0 2px",fontSize:9,color:"#9CA3AF",fontWeight:700,textTransform:"uppercase"}}>{l}</p>
+              <p style={{margin:"0 0 2px",fontSize:9,color:"#A6907C",fontWeight:700,textTransform:"uppercase"}}>{l}</p>
               <p style={{margin:0,fontSize:20,fontWeight:900,color:c}}>{v}</p>
             </div>
           </Card>
@@ -619,19 +618,19 @@ function Tamu({data,setData}) {
       </div>
 
       {filtered.length===0 ? (
-        <Card><div style={{padding:28,textAlign:"center",color:"#9CA3AF",fontSize:12}}>{q?"Tamu tidak ditemukan 🔍":"Belum ada tamu. Tap + Tambah untuk menambahkan."}</div></Card>
+        <Card><div style={{padding:28,textAlign:"center",color:"#A6907C",fontSize:12}}>{q?"Tamu tidak ditemukan 🔍":"Belum ada tamu. Tap + Tambah untuk menambahkan."}</div></Card>
       ) : (
         <Card>
           {filtered.map((item,idx)=>(
             <div key={item.id} style={{display:"flex",gap:10,padding:"10px 12px",borderBottom:idx<filtered.length-1?`1px solid ${P.cream}`:"none",alignItems:"center"}}>
               {avatar(item.nama)}
               <div style={{flex:1,minWidth:0}}>
-                <p style={{margin:"0 0 3px",fontSize:12,fontWeight:700,color:"#1F2937"}}>{item.nama}</p>
+                <p style={{margin:"0 0 3px",fontSize:12,fontWeight:700,color:"#2B1B18"}}>{item.nama}</p>
                 <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
                   <Badge v={item.konfirmasi} />
-                  <span style={{fontSize:10,color:"#9CA3AF"}}>{item.pihak} · {item.jumlah} org</span>
+                  <span style={{fontSize:10,color:"#A6907C"}}>{item.pihak} · {item.jumlah} org</span>
                 </div>
-                {item.catatan && <p style={{margin:"3px 0 0",fontSize:10,color:"#9CA3AF",fontStyle:"italic"}}>{item.catatan}</p>}
+                {item.catatan && <p style={{margin:"3px 0 0",fontSize:10,color:"#A6907C",fontStyle:"italic"}}>{item.catatan}</p>}
               </div>
               <ActionBtns onEdit={()=>openEdit(item)} onDelete={()=>setDel(item)} />
             </div>
@@ -768,11 +767,11 @@ export default function App() {
   };
 
   return (
-    <div style={{minHeight:"100vh",background:P.cream,fontFamily:"system-ui,-apple-system,sans-serif"}}>
-      <style>{`*{box-sizing:border-box}body{margin:0}.hs::-webkit-scrollbar{display:none}.hs{-ms-overflow-style:none;scrollbar-width:none}`}</style>
+    <div style={{minHeight:"100vh",background:P.cream,fontFamily:"'Inter',system-ui,-apple-system,sans-serif"}}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Inter:wght@400;500;600;700;800;900&display=swap');*{box-sizing:border-box}body{margin:0}.hs::-webkit-scrollbar{display:none}.hs{-ms-overflow-style:none;scrollbar-width:none}`}</style>
 
       {/* ── Header ── */}
-      <div style={{position:"sticky",top:0,zIndex:40,background:P.em2,boxShadow:"0 2px 12px rgba(0,0,0,.3)"}}>
+      <div style={{position:"sticky",top:0,zIndex:40,background:P.em2,borderBottom:`1px solid ${P.gold}55`,boxShadow:"0 2px 16px rgba(61,14,23,.35)"}}>
         {/* Top bar */}
         <div style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px 6px"}}>
           <span style={{fontSize:22}}>🕌</span>
@@ -812,7 +811,7 @@ export default function App() {
         {rdy ? section() : (
           <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:200,gap:10}}>
             <div style={{width:36,height:36,border:`3px solid ${P.border}`,borderTop:`3px solid ${P.em}`,borderRadius:99,animation:"spin 1s linear infinite"}} />
-            <p style={{color:"#9CA3AF",fontSize:12}}>Memuat data…</p>
+            <p style={{color:"#A6907C",fontSize:12}}>Memuat data…</p>
             <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           </div>
         )}
