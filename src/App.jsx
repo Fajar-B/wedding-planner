@@ -227,7 +227,7 @@ function Beranda({info,setInfo}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:24}}>
       <div style={{borderRadius:24,overflow:"hidden",boxShadow:"0 12px 32px rgba(122, 27, 41, 0.15)"}}>
-        <div style={{background:`linear-gradient(135deg,${P.em2} 0%,${P.em} 50%,${P.em3} 100%)`,padding:"48px 24px 32px",textAlign:"center",position:"relative"}}>
+        <div style={{background: `linear-gradient(135deg,${P.em2} 0%,${P.em} 50%,${P.em3} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E")`,}}>
           <div style={{fontSize:48,marginBottom:12}}>🕌</div>
           <p style={{color:"rgba(255,255,255,.7)",fontSize:11,letterSpacing:".3em",textTransform:"uppercase",margin:"0 0 12px",fontWeight:600}}>Walimatul &lsquo;Urs</p>
           {info.namaPria || info.namaWanita ? (
@@ -818,7 +818,18 @@ export default function App() {
         
         @media (min-width: 768px) {
           .bottom-nav { display: none; }
-          .sidebar { display: flex; flex-direction: column; width: 280px; background: ${P.em2}; color: ${P.white}; height: 100vh; position: sticky; top: 0; flex-shrink: 0; padding: 32px 20px; }
+          .sidebar { 
+  display: flex; 
+  flex-direction: column; 
+  width: 280px; 
+  background: linear-gradient(180deg, ${P.em2} 0%, ${P.em} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E"); 
+  color: ${P.white}; 
+  height: 100vh; 
+  position: sticky; 
+  top: 0; 
+  flex-shrink: 0; 
+  padding: 32px 20px; 
+}
           .sidebar-brand { margin-bottom: 40px; padding: 0 12px; }
           .sidebar-nav-item { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: transparent; border: none; color: rgba(255,255,255,0.6); width: 100%; text-align: left; border-radius: 12px; cursor: pointer; font-size: 15px; font-weight: 600; margin-bottom: 8px; transition: 0.2s; }
           .sidebar-nav-item:hover { background: rgba(255,255,255,0.05); color: ${P.white}; }
