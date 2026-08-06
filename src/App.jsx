@@ -149,7 +149,7 @@ const ActionBtns = ({onEdit,onDelete}) => (
   </div>
 );
 
-const inp = {width:"100%",border:`1px solid ${P.border}`,borderRadius:10,padding:"8px 12px",fontSize:12,fontFamily:"inherit",outline:"none",boxSizing:"border-box",background:P.white};
+const inp = {width:"100%",border:`1px solid ${P.border}`,borderRadius:10,padding:"8px 12px",fontSize:12,fontFamily:"inherit",outline:"none",boxSizing:"border-box",background:P.white, color:"#1F2937"};
 
 const Fld = ({label,children}) => (
   <div style={{marginBottom:12}}>
