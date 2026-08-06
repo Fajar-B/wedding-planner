@@ -22,7 +22,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <audio ref={audioRef} src="/audio-wedding.mp3" loop />
+      <audio ref={audioRef} src="/wedding-song.mp3" loop />
       <button className="audio-btn" onClick={toggleAudio} title={isPlaying ? "Jeda Musik" : "Putar Musik"}>
         {isPlaying ? "⏸" : "🎵"}
       </button>
@@ -193,7 +193,7 @@ function DelDlg({open,label,onClose,onConfirm}) {
         <p style={{fontWeight:800,fontSize:18,margin:"0 0 8px",color:"#1F2937"}}>Hapus data ini?</p>
         {label && <p style={{fontSize:13,color:"#6B7280",margin:"0 0 24px"}}>{label}</p>}
         <div style={{display:"flex",gap:12}}>
-          <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.white,color:"#555"}}>Batal</button>
+          <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.white}}>Batal</button>
           <button onClick={onConfirm} style={{flex:1,padding:"12px 0",border:"none",borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:"#DC2626",color:P.white}}>Hapus</button>
         </div>
       </div>
@@ -227,7 +227,8 @@ function Beranda({info,setInfo}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:24}}>
       <div style={{borderRadius:24,overflow:"hidden",boxShadow:"0 12px 32px rgba(122, 27, 41, 0.15)"}}>
-        <div style={{background: `linear-gradient(135deg,${P.em2} 0%,${P.em} 50%,${P.em3} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E")`,}}>
+        {/* Hero dengan Gradasi Marun dan Pola Motif Islami */}
+        <div style={{background:`linear-gradient(135deg,${P.em2} 0%,${P.em} 50%,${P.em3} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E")`,padding:"48px 24px 32px",textAlign:"center",position:"relative"}}>
           <div style={{fontSize:48,marginBottom:12}}>🕌</div>
           <p style={{color:"rgba(255,255,255,.7)",fontSize:11,letterSpacing:".3em",textTransform:"uppercase",margin:"0 0 12px",fontWeight:600}}>Walimatul &lsquo;Urs</p>
           {info.namaPria || info.namaWanita ? (
@@ -461,7 +462,7 @@ function Anggaran({data,setData}) {
   );
 }
 
-/* ── VENDOR (Dengan Dukungan Link Dokumen/Berkas) ────────── */
+/* ── VENDOR ────────────────────────────────────────── */
 function Vendor({data,setData}) {
   const [m, setM]   = useState(null);
   const [del, setDel] = useState(null);
@@ -538,7 +539,7 @@ function Vendor({data,setData}) {
   );
 }
 
-/* ── RUNDOWN (Dengan Fitur Ekspor Cetak/PDF) ─────────────── */
+/* ── RUNDOWN ──────────────────────────────────────── */
 function Rundown({data,setData}) {
   const [m, setM]   = useState(null);
   const [del, setDel] = useState(null);
@@ -557,7 +558,7 @@ function Rundown({data,setData}) {
   const remove = () => { setData(p=>p.filter(i=>i.id!==del.id)); setDel(null); };
 
   const handleExportPDF = () => {
-    window.print(); // Memanfaatkan fungsi cetak browser untuk menyimpan PDF rundown bersih
+    window.print();
   };
 
   return (
@@ -602,7 +603,7 @@ function Rundown({data,setData}) {
   );
 }
 
-/* ── TAMU (Dengan Fitur Ekspor CSV) ──────────────────────── */
+/* ── TAMU ──────────────────────────────────────────── */
 function Tamu({data,setData}) {
   const [m, setM]   = useState(null);
   const [del, setDel] = useState(null);
@@ -724,7 +725,7 @@ export default function App() {
   const [rd,   setRd]   = useState(D0_RD);
   const [tamu, setTamu] = useState([]);
   const [rdy,  setRdy]  = useState(false);
-  const [lastSaved, setLastSaved] = useState(""); // Fitur Audit Trail / Log Waktu Simpan
+  const [lastSaved, setLastSaved] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -818,18 +819,19 @@ export default function App() {
         
         @media (min-width: 768px) {
           .bottom-nav { display: none; }
+          /* Sidebar dengan gradasi marun dan motif pattern islami yang senada */
           .sidebar { 
-  display: flex; 
-  flex-direction: column; 
-  width: 280px; 
-  background: linear-gradient(180deg, ${P.em2} 0%, ${P.em} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E"); 
-  color: ${P.white}; 
-  height: 100vh; 
-  position: sticky; 
-  top: 0; 
-  flex-shrink: 0; 
-  padding: 32px 20px; 
-}
+            display: flex; 
+            flex-direction: column; 
+            width: 280px; 
+            background: linear-gradient(180deg, ${P.em2} 0%, ${P.em} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E"); 
+            color: ${P.white}; 
+            height: 100vh; 
+            position: sticky; 
+            top: 0; 
+            flex-shrink: 0; 
+            padding: 32px 20px; 
+          }
           .sidebar-brand { margin-bottom: 40px; padding: 0 12px; }
           .sidebar-nav-item { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: transparent; border: none; color: rgba(255,255,255,0.6); width: 100%; text-align: left; border-radius: 12px; cursor: pointer; font-size: 15px; font-weight: 600; margin-bottom: 8px; transition: 0.2s; }
           .sidebar-nav-item:hover { background: rgba(255,255,255,0.05); color: ${P.white}; }
@@ -856,7 +858,6 @@ export default function App() {
             ))}
           </nav>
 
-          {/* Panel Audit Trail Sederhana di Sidebar */}
           <div style={{padding:"14px", background:"rgba(0,0,0,0.2)", borderRadius:14, marginTop:16}}>
             <p style={{fontSize:11, color:"rgba(255,255,255,0.5)", margin:"0 0 4px"}}>Aktivitas Terakhir:</p>
             <p style={{fontSize:12, color:P.goldL, margin:0, fontWeight:700}}>{lastSaved ? `Tersinkron pukul ${lastSaved}` : "Menunggu perubahan..."}</p>
