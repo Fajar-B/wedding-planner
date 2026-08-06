@@ -22,7 +22,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <audio ref={audioRef} src="/wedding-song.mp3" loop />
+      <audio ref={audioRef} src="/audio-wedding.mp3" loop />
       <button className="audio-btn" onClick={toggleAudio} title={isPlaying ? "Jeda Musik" : "Putar Musik"}>
         {isPlaying ? "⏸" : "🎵"}
       </button>
