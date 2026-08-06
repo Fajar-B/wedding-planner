@@ -29,7 +29,7 @@ const AudioPlayer = () => {
       */}
       <audio 
         ref={audioRef} 
-        src="https://pixabay.com/music/modern-classical-romantic-fairytale-158125/" 
+        src="audio-wedding.mp3" 
         loop 
       />
       
