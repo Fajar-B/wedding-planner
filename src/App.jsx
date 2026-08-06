@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 /* ── KONFIGURASI SUPABASE ────────────────────────── */
@@ -6,6 +6,61 @@ import { createClient } from "@supabase/supabase-js";
 const SUPABASE_URL = "https://rpqkfkrtmxhjnufwuotv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcWtma3J0bXhoam51Znd1b3R2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5Mjc4MzAsImV4cCI6MjEwMTUwMzgzMH0.xLoympkxRmkWYSA7cYEM9Wp7h9cURSuU_OkquTDbumI";
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+/* ── AUDIO PLAYER COMPONENT ──────────────────────── */
+const AudioPlayer = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  return (
+    <>
+      {/* 
+        Ganti URL src di bawah dengan URL file MP3 instrumen Anda. 
+        Loop digunakan agar lagu mengulang saat habis. 
+      */}
+      <audio 
+        ref={audioRef} 
+        src="https://pixabay.com/music/modern-classical-romantic-fairytale-158125.mp3" 
+        loop 
+      />
+      
+      <button 
+        onClick={toggleAudio}
+        style={{
+          position: "fixed",
+          bottom: 100, // Berada di atas navigasi bawah
+          right: 20,
+          zIndex: 50,
+          width: 44,
+          height: 44,
+          borderRadius: 99,
+          background: isPlaying ? P.em : P.white,
+          border: `2px solid ${P.gold}`,
+          color: isPlaying ? P.white : P.goldD,
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+          transition: "all 0.3s ease",
+        }}
+        title={isPlaying ? "Jeda Musik" : "Putar Musik"}
+      >
+        {isPlaying ? "⏸" : "🎵"}
+      </button>
+    </>
+  );
+};
 
 /* ── PALETTE (Tema Marun & Emas) ─────────────────── */
 const P = {
@@ -932,6 +987,7 @@ export default function App() {
           </div>
         )}
       </div>
+      <AudioPlayer />
     </div>
   );
 }
