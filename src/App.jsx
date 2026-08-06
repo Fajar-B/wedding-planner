@@ -22,7 +22,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <audio ref={audioRef} src="/wedding-song.mp3" loop />
+      <audio ref={audioRef} src="/audio-wedding.mp3" loop />
       <button className="audio-btn" onClick={toggleAudio} title={isPlaying ? "Jeda Musik" : "Putar Musik"}>
         {isPlaying ? "⏸" : "🎵"}
       </button>
@@ -193,7 +193,7 @@ function DelDlg({open,label,onClose,onConfirm}) {
         <p style={{fontWeight:800,fontSize:18,margin:"0 0 8px",color:"#1F2937"}}>Hapus data ini?</p>
         {label && <p style={{fontSize:13,color:"#6B7280",margin:"0 0 24px"}}>{label}</p>}
         <div style={{display:"flex",gap:12}}>
-          <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.white}}>Batal</button>
+          <button onClick={onClose} style={{flex:1,padding:"12px 0",border:`1px solid ${P.border}`,borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:P.white,color:"#555"}}>Batal</button>
           <button onClick={onConfirm} style={{flex:1,padding:"12px 0",border:"none",borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",background:"#DC2626",color:P.white}}>Hapus</button>
         </div>
       </div>
