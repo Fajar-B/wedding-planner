@@ -227,23 +227,9 @@ function Beranda({info,setInfo}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:24}}>
       <div style={{borderRadius:24,overflow:"hidden",boxShadow:"0 12px 32px rgba(122, 27, 41, 0.15)"}}>
-        {/* Hero dengan Gradasi Marun, Motif Geometris Bintang Islam & Hiasan Border Kubah Emas */}
-        <div style={{
-          background: `linear-gradient(135deg, ${P.em2} 0%, ${P.em} 50%, ${P.em3} 100%), url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.15' fill-rule='evenodd'%3E%3Cpath d='M40 0l40 40-40 40L0 40zM40 8.586L8.586 40 40 71.414 71.414 40z'/%3E%3Ccircle cx='40' cy='40' r='15' fill='none' stroke='%23D4AF37' stroke-width='0.8' stroke-opacity='0.2'/></g%3E%3C/svg%3E")`,
-          padding: "56px 24px 32px",
-          textAlign: "center",
-          position: "relative",
-          borderTop: `6px solid ${P.gold}`
-        }}>
-          {/* Ornamen Arch/Kubah Emas di Atas Banner seperti Referensi */}
-          <div style={{
-            position: "absolute", top: 0, left: 0, right: 0, height: 42,
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0,0 Q37.5,45 75,0 Q112.5,45 150,0 Q187.5,45 225,0 Q262.5,45 300,0 Q337.5,45 375,0 Q412.5,45 450,0 Q487.5,45 525,0 Q562.5,45 600,0 Q637.5,45 675,0 Q712.5,45 750,0 Q787.5,45 825,0 Q862.5,45 900,0 Q937.5,45 975,0 Q1012.5,45 1050,0 Q1087.5,45 1125,0 Q1162.5,45 1200,0 L1200,60 L0,60 Z' fill='%234A0E1B' stroke='%23D4AF37' stroke-width='3'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat-x",
-            backgroundSize: "auto 100%"
-          }} />
-
-          <div style={{fontSize:48,marginBottom:12, marginTop: 12}}>🕌</div>
+        {/* Hero dengan Gradasi Marun dan Pola Motif Islami */}
+        <div style={{background:`linear-gradient(135deg,${P.em2} 0%,${P.em} 50%,${P.em3} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E")`,padding:"48px 24px 32px",textAlign:"center",position:"relative"}}>
+          <div style={{fontSize:48,marginBottom:12}}>🕌</div>
           <p style={{color:"rgba(255,255,255,.7)",fontSize:11,letterSpacing:".3em",textTransform:"uppercase",margin:"0 0 12px",fontWeight:600}}>Walimatul &lsquo;Urs</p>
           {info.namaPria || info.namaWanita ? (
             <div style={{marginBottom:16}}>
@@ -833,22 +819,19 @@ export default function App() {
         
         @media (min-width: 768px) {
           .bottom-nav { display: none; }
-          /* Sidebar dengan gradasi marun, motif bintang geometris Islam, dan border atas emas */
+          /* Sidebar dengan gradasi marun dan motif pattern islami yang senada */
           .sidebar { 
-  display: flex; 
-  flex-direction: column; 
-  width: 280px; 
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(180deg, ${P.em2} 0%, ${P.em} 100%), url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.15' fill-rule='evenodd'%3E%3Cpath d='M40 0l40 40-40 40L0 40zM40 8.586L8.586 40 40 71.414 71.414 40z'/%3E%3Ccircle cx='40' cy='40' r='15' fill='none' stroke='%23D4AF37' stroke-width='0.8' stroke-opacity='0.2'/></g%3E%3C/svg%3E");
-  color: ${P.white}; 
-  height: 100vh; 
-  position: sticky; 
-  top: 0; 
-  flex-shrink: 0; 
-  padding: 32px 20px; 
-  border-right: 2px solid ${P.gold};
-}}
+            display: flex; 
+            flex-direction: column; 
+            width: 280px; 
+            background: linear-gradient(180deg, ${P.em2} 0%, ${P.em} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E"); 
+            color: ${P.white}; 
+            height: 100vh; 
+            position: sticky; 
+            top: 0; 
+            flex-shrink: 0; 
+            padding: 32px 20px; 
+          }
           .sidebar-brand { margin-bottom: 40px; padding: 0 12px; }
           .sidebar-nav-item { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: transparent; border: none; color: rgba(255,255,255,0.6); width: 100%; text-align: left; border-radius: 12px; cursor: pointer; font-size: 15px; font-weight: 600; margin-bottom: 8px; transition: 0.2s; }
           .sidebar-nav-item:hover { background: rgba(255,255,255,0.05); color: ${P.white}; }
@@ -860,14 +843,7 @@ export default function App() {
 
       <div className="layout-wrapper">
         <aside className="sidebar">
-  {/* ── ORNAMEN KUBAH/LENGKUNG EMAS DI ATAS SIDEBAR ── */}
-  <div style={{
-    position: "absolute", top: 0, left: 0, right: 0, height: 36,
-    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0,0 Q37.5,45 75,0 Q112.5,45 150,0 Q187.5,45 225,0 Q262.5,45 300,0 Q337.5,45 375,0 Q412.5,45 450,0 Q487.5,45 525,0 Q562.5,45 600,0 Q637.5,45 675,0 Q712.5,45 750,0 Q787.5,45 825,0 Q862.5,45 900,0 Q937.5,45 975,0 Q1012.5,45 1050,0 Q1087.5,45 1125,0 Q1162.5,45 1200,0 L1200,60 L0,60 Z' fill='%234A0E1B' stroke='%23D4AF37' stroke-width='3'/%3E%3C/svg%3E")`,
-    backgroundRepeat: "repeat-x",
-    backgroundSize: "auto 100%"
-  }} />
-          <div className="sidebar-brand" style={{marginTop: 12}}>
+          <div className="sidebar-brand">
             <span style={{fontSize:32}}>🕌</span>
             <h1 style={{fontSize:18, fontWeight:900, margin:"12px 0 4px", color:P.white}}>Walimatul 'Urs</h1>
             <p style={{fontSize:12, color:P.gold, margin:0}}>{info.namaPria&&info.namaWanita ? `${info.namaPria} & ${info.namaWanita}` : "Wedding Planner"}</p>
