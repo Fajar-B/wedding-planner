@@ -6,6 +6,9 @@ const SUPABASE_URL = "https://rpqkfkrtmxhjnufwuotv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcWtma3J0bXhoam51Znd1b3R2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5Mjc4MzAsImV4cCI6MjEwMTUwMzgzMH0.xLoympkxRmkWYSA7cYEM9Wp7h9cURSuU_OkquTDbumI";
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Batas waktu inaktif sebelum auto-logout (misal: 15 menit = 15 * 60 * 1000 ms)
+const IDLE_TIMEOUT_MS = 30 * 60 * 1000;
+
 /* ── AUDIO PLAYER COMPONENT ──────────────────────── */
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
