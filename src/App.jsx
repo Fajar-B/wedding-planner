@@ -201,6 +201,92 @@ function DelDlg({open,label,onClose,onConfirm}) {
   );
 }
 
+/* ── COMPONENT LOGIN / AUTHENTICATION ─────────────── */
+function AuthOverlay({ onLoginSuccess }) {
+  const [pass, setPass] = useState("");
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!pass.trim()) return;
+    setLoading(true);
+    setErr("");
+
+    try {
+      const { data: isValid, error } = await supabase.rpc("check_app_password", {
+        input_password: pass
+      });
+
+      if (error) {
+        setErr("Gagal memverifikasi password.");
+      } else if (isValid) {
+        localStorage.setItem("app_authenticated", "true");
+        onLoginSuccess();
+      } else {
+        setErr("Password salah!");
+      }
+    } catch (e) {
+      setErr("Terjadi kesalahan koneksi.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div style={{
+      position: "fixed",
+      inset: 0,
+      zIndex: 999,
+      background: `linear-gradient(135deg, ${P.em2} 0%, ${P.em} 100%)`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20
+    }}>
+      <Card style={{ width: "100%", maxWidth: 360, padding: 32, textAlign: "center", background: P.white }}>
+        <div style={{ fontSize: 48, marginBottom: 12 }}>🕌</div>
+        <h2 style={{ fontSize: 20, fontWeight: 900, color: P.em, margin: "0 0 8px" }}>Walimatul 'Urs</h2>
+        <p style={{ fontSize: 13, color: "#6B7280", margin: "0 0 24px" }}>Masukkan password untuk mengakses perencanaan pernikahan.</p>
+        
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: 16 }}>
+            <input
+              type="password"
+              style={{ ...inp, textAlign: "center", fontSize: 16 }}
+              placeholder="Masukkan Password"
+              value={pass}
+              onChange={e => setPass(e.target.value)}
+              disabled={loading}
+              autoFocus
+            />
+          </div>
+
+          {err && <p style={{ fontSize: 12, color: "#DC2626", margin: "0 0 16px", fontWeight: 700 }}>{err}</p>}
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: "100%",
+              padding: "14px 0",
+              border: "none",
+              borderRadius: 10,
+              fontSize: 14,
+              fontWeight: 800,
+              cursor: loading ? "wait" : "pointer",
+              background: P.em,
+              color: P.white
+            }}
+          >
+            {loading ? "Memverifikasi..." : "Masuk Aplikasi"}
+          </button>
+        </form>
+      </Card>
+    </div>
+  );
+}
+
 /* ── BERANDA ──────────────────────────────────────── */
 function Beranda({info,setInfo}) {
   const [open, setOpen] = useState(false);
@@ -227,7 +313,6 @@ function Beranda({info,setInfo}) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:24}}>
       <div style={{borderRadius:24,overflow:"hidden",boxShadow:"0 12px 32px rgba(122, 27, 41, 0.15)"}}>
-        {/* Hero dengan Gradasi Marun dan Pola Motif Islami */}
         <div style={{background:`linear-gradient(135deg,${P.em2} 0%,${P.em} 50%,${P.em3} 100%), url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M22 0l22 22-22 22L0 22zM22 4.586L4.586 22 22 39.414 39.414 22z'/%3E%3C/g%3E%3C/svg%3E")`,padding:"48px 24px 32px",textAlign:"center",position:"relative"}}>
           <div style={{fontSize:48,marginBottom:12}}>🕌</div>
           <p style={{color:"rgba(255,255,255,.7)",fontSize:11,letterSpacing:".3em",textTransform:"uppercase",margin:"0 0 12px",fontWeight:600}}>Walimatul &lsquo;Urs</p>
@@ -717,6 +802,7 @@ const TABS = [
 
 /* ── MAIN APP & AUDIT TRAIL ────────────────────────── */
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [tab,  setTab]  = useState("beranda");
   const [info, setInfo] = useState(D0_INFO);
   const [cl,   setCl]   = useState(D0_CL);
@@ -727,7 +813,17 @@ export default function App() {
   const [rdy,  setRdy]  = useState(false);
   const [lastSaved, setLastSaved] = useState("");
 
+  // Cek apakah user sudah pernah login sebelumnya
   useEffect(() => {
+    const isAuth = localStorage.getItem("app_authenticated");
+    if (isAuth === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     const fetchData = async () => {
       try {
         const { data } = await supabase.from("wedding_data").select("content, updated_at").eq("id", "main").single();
@@ -769,10 +865,10 @@ export default function App() {
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
-    if (!rdy) return;
+    if (!rdy || !isAuthenticated) return;
     const saveData = async () => {
       const timeStr = new Date().toISOString();
       try {
@@ -788,7 +884,12 @@ export default function App() {
     };
     const timeoutId = setTimeout(saveData, 1000); 
     return () => clearTimeout(timeoutId);
-  }, [info, cl, ang, vnd, rd, tamu, rdy]);
+  }, [info, cl, ang, vnd, rd, tamu, rdy, isAuthenticated]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("app_authenticated");
+    setIsAuthenticated(false);
+  };
 
   const renderContent = ()=>{
     switch(tab){
@@ -801,6 +902,10 @@ export default function App() {
       default: return null; 
     }
   };
+
+  if (!isAuthenticated) {
+    return <AuthOverlay onLoginSuccess={() => setIsAuthenticated(true)} />;
+  }
 
   return (
     <>
@@ -819,7 +924,6 @@ export default function App() {
         
         @media (min-width: 768px) {
           .bottom-nav { display: none; }
-          /* Sidebar dengan gradasi marun dan motif pattern islami yang senada */
           .sidebar { 
             display: flex; 
             flex-direction: column; 
@@ -860,7 +964,22 @@ export default function App() {
 
           <div style={{padding:"14px", background:"rgba(0,0,0,0.2)", borderRadius:14, marginTop:16}}>
             <p style={{fontSize:11, color:"rgba(255,255,255,0.5)", margin:"0 0 4px"}}>Aktivitas Terakhir:</p>
-            <p style={{fontSize:12, color:P.goldL, margin:0, fontWeight:700}}>{lastSaved ? `Tersinkron pukul ${lastSaved}` : "Menunggu perubahan..."}</p>
+            <p style={{fontSize:12, color:P.goldL, margin:"0 0 8px", fontWeight:700}}>{lastSaved ? `Tersinkron pukul ${lastSaved}` : "Menunggu perubahan..."}</p>
+            <button 
+              onClick={handleLogout}
+              style={{
+                width: "100%",
+                padding: "6px 0",
+                background: "rgba(255,255,255,0.1)",
+                border: "none",
+                borderRadius: 6,
+                color: "#FEE2E2",
+                fontSize: 11,
+                cursor: "pointer"
+              }}
+            >
+              🔒 Keluar Aplikasi
+            </button>
           </div>
         </aside>
 
